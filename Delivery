@@ -7,7 +7,7 @@ public class Delivery : MonoBehaviour
     bool hasPackage = false;
 
     SpriteRenderer spriteRenderer;
-    // Will change the color when the package is picked up
+    // Gets the sprite renderer so your car will change color on drop off or pick up
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>(); 
@@ -21,7 +21,7 @@ public class Delivery : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Will let you pick up the package, will say it in console, and will change the color
+        // Will let you pick up the package, will say it in the console, and will change the color of your car
         if (other.tag == "Package" && !hasPackage)
         {
             Debug.Log("Package picked up. Now to the Customer.");
@@ -29,7 +29,7 @@ public class Delivery : MonoBehaviour
             spriteRenderer.color = hasPackageColor;
             Destroy(other.gameObject, destroyDelay);
         }
-        // Checks to see if you have package and makes sure you did drop it off
+        // Checks to see if you have package and makes sure to make it think you actually gave away the package so you can pick up another and not deliver to multiple people
         if (other.tag == "Customer" && hasPackage)
         {
             Debug.Log("You have delivered the package. CONGATULATIONS!!!");
@@ -37,7 +37,7 @@ public class Delivery : MonoBehaviour
             spriteRenderer.color = noPackageColor;
             Destroy(other.gameObject, destroyDelay);
         }
-        // if you drive over the customer with no package CAUTION tends to say after drop off aswell
+        // if you drive over the customer with no package CAUTION tends to say after drop off as well but only affects the Debug.log
         if (other.tag == "Customer" && !hasPackage)
         {
             Debug.Log("You still need the package");
