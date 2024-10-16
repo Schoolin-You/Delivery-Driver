@@ -1,3 +1,12 @@
+public class FollowCamera : MonoBehaviour
 {
-// Add the Delivery Driver FollowCamera script here
+    //The camera positon will follow the Car/Driver
+
+    [SerializeField] GameObject thingToFollow;
+
+    //Refreshes at every frame per second
+    void LateUpdate()
+    {
+        transform.position = thingToFollow.transform.position + new Vector3 (0,0,-10);
+    }
 }
